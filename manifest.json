@@ -18,7 +18,8 @@
     }
   ],
   "web_accessible_resources": [
-    "index.js"
+    "index.js",
+    "colors.json"
   ],
   "permissions": [
     "*://*.github.com/*",
