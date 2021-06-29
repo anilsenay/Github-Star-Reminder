@@ -1,0 +1,28 @@
+{
+  "manifest_version": 2,
+  "name": "Github Star Reminder",
+  "version": "1.0",
+
+  "description": "Github star reminder",
+
+  "icons": {
+    "48": "icon-48.png",
+    "96": "icon-96.png",
+    "128": "icon.png"
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["*://*.github.com/"],
+      "js": ["index.js"]
+    }
+  ],
+  "web_accessible_resources": [
+    "index.js"
+  ],
+  "permissions": [
+    "*://*.github.com/*",
+    "activeTab",
+    "webRequest"
+  ]
+ }
