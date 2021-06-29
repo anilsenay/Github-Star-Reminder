@@ -1,8 +1,16 @@
-import colors from "./colors.json";
+const colorsJson = chrome.runtime.getURL("colors.json");
+let colors = [];
+fetch(colorsJson)
+  .then((response) => {
+    return response.json();
+  })
+  .then((json) => {
+    colors = json;
+  });
 
 let starReminderState = 0;
 
-function getTitle(){
+function getTitle() {
   let title = document.createElement("h2");
   title.innerText = "Stars Reminder";
   title.className = "f5 text-bold mb-1";
@@ -14,7 +22,7 @@ function getTitle(){
   return title;
 }
 
-function getExploreText(username){
+function getExploreText(username) {
   let exploreText = document.createElement("a");
   exploreText.innerText = "Other stars → ";
   exploreText.className = "d-block Link--secondary no-underline f6 mb-3";
@@ -22,7 +30,7 @@ function getExploreText(username){
   return exploreText;
 }
 
-function getItem(i){
+function getItem(i) {
   let item = document.createElement("div");
   item.className = "py-2 my-2 border-bottom color-border-secondary";
 
@@ -53,6 +61,8 @@ function getItem(i){
   languageParent.className = "mr-2 f6 color-text-secondary text-normal";
   languageParent.appendChild(emptySpan);
   item.appendChild(languageParent);
+
+  return item;
 }
 
 function run() {
@@ -101,13 +111,12 @@ let a = setInterval(() => {
   console.log("Github reminder working...");
   run();
   // if reminder added, stop
-  if (starReminderState === 1){
+  if (starReminderState === 1) {
     clearInterval(a);
-  // if an error occurs, run one last time
-  }else if (starReminderState === 2) {
+    // if an error occurs, run one last time
+  } else if (starReminderState === 2) {
     setTimeout(() => {
       clearInterval(a);
     }, 5000);
   }
 }, 5000);
-
